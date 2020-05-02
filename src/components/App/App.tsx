@@ -4,6 +4,8 @@ import './App.css';
 
 import { PlayerList } from '../PlayerList/PlayerList';
 
+import { BattleZone } from '../BattleZone/BattleZone';
+
 // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
 
 function App() {
@@ -25,6 +27,10 @@ function App() {
       Rock Paper Scissors
 
       <PlayerList players={players} />
+
+      <br /><br />
+
+      <BattleZone players={players} />
 
     </div>
   );

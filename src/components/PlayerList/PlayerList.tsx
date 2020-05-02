@@ -6,6 +6,7 @@ import styles from './PlayerList.module.scss';
 
 export interface IPlayerListProps {
   players: [];
+  
 }
 
 export function PlayerList(props: any) {

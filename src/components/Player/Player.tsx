@@ -32,7 +32,7 @@ import styles from './Player.module.scss';
 export function Player(props: any) {
   // const [players, setPlayers] = useState([]);
   
-
+  console.log(props.player)
 
   return (
     <div className={styles.player}>
