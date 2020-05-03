@@ -1,5 +1,5 @@
 import React from 'react';
-// import { v4 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 // import { GameObject } from './GameObject';
 
 import Component from './Component';
@@ -22,7 +22,7 @@ export class Player extends Component {
 
     public render(): React.ReactNode {
         return (
-            <PlayerView displayName={this.displayName}/>
+            <PlayerView key={uuid()} displayName={this.displayName}/>
         );
     }
 }

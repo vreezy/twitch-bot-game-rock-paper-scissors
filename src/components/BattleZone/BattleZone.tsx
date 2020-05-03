@@ -3,7 +3,10 @@ import { useState, useEffect, useRef } from 'react';
 
 import styles from './BattleZone.module.scss'; 
 
+import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
+
+import { GameService } from '../../services/GameService';
 
 export interface IBattleZoneProps {
     players: Players;
@@ -12,23 +15,16 @@ export interface IBattleZoneProps {
 
 
 export function BattleZone(props: IBattleZoneProps) {
-  // const [players, setPlayers] = useState([]);
-  const [counter, setCounter] = useState(0);
+    // const [players, setPlayers] = useState([]);
+    const [counter, setCounter] = useState(0);
 
 
+    const player1: Player | null = props.players.getRandomActivePlayer();
+    const player2: Player | null = player1 !== null ? props.players.getRandomActivePlayer([player1]): null;
 
-
-    const getPlayer2 = (p1: number): number => {
-        if(props.players.length > 0) {
-            const tryx: number = rollDice(0, props.players.length - 1);
-            if(tryx === p1) {
-                    return getPlayer2(p1);
-            }
-            return tryx;
-        }
-        return 0;
-    }
-
+    console.log(props.players.length())
+    console.log(player1)
+    console.log(player2)
     // 0 rock
     // 1 paper
     // 2 scissors
@@ -48,14 +44,10 @@ export function BattleZone(props: IBattleZoneProps) {
     }
 
 
-    const player1Index: number = rollDice(0, props.players.length - 1);
-    const player2Index: number = getPlayer2(player1Index);
 
-    const player1HandValue: number = rollDice(0, 2);
-    const player2HandValue: number = rollDice(0, 2);
+    const player1HandValue: number = GameService.rollDice(0, 2);
+    const player2HandValue: number = GameService.rollDice(0, 2);
 
-    console.log("player1Index ", player1Index);
-    console.log("player2Index ", player2Index)
     
     const result = (myValue: number, enemyValue: number): boolean => {
         if((myValue - enemyValue) === 1 || (myValue - enemyValue) === -1) {
@@ -89,63 +81,57 @@ export function BattleZone(props: IBattleZoneProps) {
     //     setCount(count + 1);
     // }, delay);
 
-    const newPlayers = [...props.players];
 
-    const updatePlayers = (newPlayers: IPlayerValue[], player1Index: number, player2Index: number, myValue: number, enemyValue: number) => {
-        const myResult = result(myValue, enemyValue);
-        const enemyResult = result(enemyValue, myValue);
-
-        if(myResult && !enemyResult) {
-            newPlayers[player1Index].rpsWins += 1;
-        }
-
-        if(!myResult && enemyResult) {
-            newPlayers[player2Index].active = false;
-        }
-
-        
-    }
 
     useEffect(() => {
-        var timerID = setInterval( () => tick(), 1000 );
+        var timerID = setInterval( () => tick(), 10000 );
         return function cleanup() {
           clearInterval(timerID);
         };
     });
 
     function tick() {
-        updatePlayers(newPlayers, player1Index, player2Index,player1HandValue, player2HandValue)
-        props.onChange(newPlayers)
+        //
+        // props.onChange(newPlayers)
         setCounter(counter + 1);
     }
 
-    if(props.players.length > 1) {
+    if(player1 !== null && player2 !== null ) {
         return (
             <div className={styles.container}>
                 <div>
-                    <Player key="p1" player={props.players[player1Index]} />
+                    {player1.render()}
                 </div>
                 <div>
-                    {getSymbol(player1HandValue)}<br />
-                    {player1HandValue}<br/>
-                    {resultView(player1HandValue, player2HandValue)}</div>
+                    Hallo
+                    {/* {getSymbol(player1HandValue)}<br /> */}
+                    {/* {player1HandValue}<br/> */}
+                    {/* {resultView(player1HandValue, player2HandValue)} */}
+                </div>
                 <div>
                     VS.<br />
                     {counter}
                 </div>
                 <div>
-                    {getSymbol(player2HandValue)}<br />
-                    {player2HandValue}<br/>
-                    {resultView(player2HandValue, player1HandValue)}
+                    Hallo
+                    {/* {getSymbol(player2HandValue)}<br /> */}
+                    {/* {player2HandValue}<br/> */}
+                    {/* {resultView(player2HandValue, player1HandValue)} */}
                 </div>
                     
-                <div><Player key="p2" player={props.players[player2Index]} /></div>
+                <div>
+                    {player2.render()}    
+                </div>
         
             </div>
         );
     }
 
-    return null;
+    return (
+        <div>no players</div>
+    )
+
+
 }
 
 // function useInterval(callback:any, delay:any) {

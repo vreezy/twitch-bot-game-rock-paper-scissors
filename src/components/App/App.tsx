@@ -4,7 +4,7 @@ import styles from './App.module.scss';
 
 // import { PlayerList } from '../PlayerList/PlayerList';
 
-// import { BattleZone } from '../BattleZone/BattleZone';
+import { BattleZone } from '../BattleZone/BattleZone';
 
 import { IUser } from '../../interfaces/IUser';
 
@@ -64,7 +64,7 @@ function App() {
        
       <br /><br />
 
-      {/* <ZoneOrAward /> */}
+      <BattleZone players={players} />
      
 
     </div>
