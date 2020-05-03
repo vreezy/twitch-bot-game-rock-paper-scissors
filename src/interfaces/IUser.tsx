@@ -1,4 +1,4 @@
-export interface IPlayer {
+export interface IUser {
    "badge-info": null |string;
    "badges": {
      "broadcaster": number;
@@ -20,7 +20,6 @@ export interface IPlayer {
    "badges-raw": string;
    "username": string;
    "message-type": string;
-
 }
 
 

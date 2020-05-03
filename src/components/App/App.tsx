@@ -6,12 +6,12 @@ import { PlayerList } from '../PlayerList/PlayerList';
 
 import { BattleZone } from '../BattleZone/BattleZone';
 
-import { IPlayer } from '../../interfaces/IPlayer';
+import { IUser } from '../../interfaces/IUser';
 
 // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
 
 function App() {
-  const initUser: IPlayer[] = []
+  const initUser: IUser[] = []
   const [players, setPlayers] = useState(initUser);
   const [loading, setLoading] = useState(true);
   
