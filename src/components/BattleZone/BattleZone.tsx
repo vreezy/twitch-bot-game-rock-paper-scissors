@@ -128,7 +128,7 @@ function useInterval(callback:any, delay:any) {
       function tick() {
 
             // eslint-disable-next-line 
-            tslint:disable
+            // eslint-disable
             savedCallback.current();
       }
   
