@@ -5,10 +5,10 @@ import styles from './BattleZone.module.scss';
 
 import { Player } from '../Player/Player';
 
-import { IUser } from '../../interfaces/IUser';
+import { IPlayerValue } from '../../interfaces/IPlayerValue';
 
 export interface IBattleZoneProps {
-    players: IUser[];
+    players: IPlayerValue[];
     // onChange(players: any[]) : void;
 }
 
@@ -94,7 +94,9 @@ export function BattleZone(props: IBattleZoneProps) {
     if(props.players.length > 0) {
         return (
             <div className={styles.container}>
-                <div><Player key="p1" player={props.players[player1Index]} /></div>
+                <div>
+                    <Player key="p1" player={props.players[player1Index]} />
+                </div>
                 <div>
                     {getSymbol(player1HandValue)}<br />
                     {player1HandValue}<br/>
@@ -115,21 +117,24 @@ export function BattleZone(props: IBattleZoneProps) {
     return null;
 }
 
-// function useInterval(callback:any, delay:any) {
-//     const savedCallback = useRef();
+function useInterval(callback:any, delay:any) {
+    const savedCallback = useRef();
   
-//     useEffect(() => {
-//       savedCallback.current = callback;
-//     });
+    useEffect(() => {
+      savedCallback.current = callback;
+    });
   
-//     useEffect(() => {
-//       function tick() {
-//         savedCallback.current();
-//       }
+    useEffect(() => {
+      function tick() {
+
+            // eslint-disable-next-line 
+            tslint:disable
+            savedCallback.current();
+      }
   
-//       let id = setInterval(tick, delay);
-//       return () => clearInterval(id);
-//     }, [delay]);
-//   }
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }, [delay]);
+  }
 
 export default BattleZone;

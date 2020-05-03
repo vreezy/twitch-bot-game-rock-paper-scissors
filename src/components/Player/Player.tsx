@@ -4,13 +4,13 @@ import React from 'react';
 import styles from './Player.module.scss'; 
 // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
 
-import { IUser } from '../../interfaces/IUser';
-export interface IUserComp {
-  player: IUser;
+import { IPlayerValue } from '../../interfaces/IPlayerValue';
+export interface IPlayer {
+  player: IPlayerValue;
 }
 
 
-export function Player(props: IUserComp) {
+export function Player(props: IPlayer) {
   // const [players, setPlayers] = useState([]);
   
   // console.log(props.player)

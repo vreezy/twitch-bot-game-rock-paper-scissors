@@ -4,9 +4,9 @@ import React from 'react';
 import { Player } from '../Player/Player';
 import styles from './PlayerList.module.scss';
 
-import { IUser } from '../../interfaces/IUser';
+import { IPlayerValue } from '../../interfaces/IPlayerValue';
 export interface IUserListProps {
-  players: IUser[];
+  players: IPlayerValue[];
   
 }
 
@@ -17,7 +17,7 @@ export function PlayerList(props: IUserListProps) {
 
   return (
     <div className={styles.container}>
-      {props.players.map((player:IUser, index: number) => {
+      {props.players.map((player:IPlayerValue, index: number) => {
         return <Player key={"p" + index} player={player} />
       })}
     </div>
