@@ -14,7 +14,7 @@ import { IPlayerValue } from '../../interfaces/IPlayerValue';
 function App() {
   const initUser: IPlayerValue[] = []
   const [players, setPlayers] = useState(initUser);
-  const [activePlayers, setActivePlayers] = useState(initUser);
+
   const [loading, setLoading] = useState(true);
 
   const getPlayers = (users: IUser[]): IPlayerValue[] => {
@@ -38,7 +38,6 @@ function App() {
       const user: IUser[] = await response.json();
       
       setPlayers(getPlayers(user));
-      setActivePlayers(getPlayers(user));
       setLoading(false);
     }
     if(loading) {
@@ -54,12 +53,12 @@ function App() {
     )
   }
 
-  const updatePlayers = (players: IPlayerValue[]) => {
-    const activePlayer = players.filter((player: IPlayerValue) => {
-      return player.active ? true : false;
-    })
-    setActivePlayers(activePlayer)
-  }
+  // const updatePlayers = (players: IPlayerValue[]) => {
+  //   const activePlayer = players.filter((player: IPlayerValue) => {
+  //     return player.active ? true : false;
+  //   })
+  //   setActivePlayers(activePlayer)
+  // }
 
 
   const ZoneOrAward = () => {

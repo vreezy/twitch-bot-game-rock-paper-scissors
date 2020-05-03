@@ -17,6 +17,7 @@ export function BattleZone(props: IBattleZoneProps) {
   // const [players, setPlayers] = useState([]);
   const [counter, setCounter] = useState(0);
 
+
     const rollDice = (min: number, max: number) => {
         return min + Math.floor(Math.random() * (max-min + 1))
     }
@@ -99,7 +100,6 @@ export function BattleZone(props: IBattleZoneProps) {
         const enemyResult = result(enemyValue, myValue);
 
         if(myResult && !enemyResult) {
-            
             newPlayers[player1Index].rpsWins += 1;
         }
 
