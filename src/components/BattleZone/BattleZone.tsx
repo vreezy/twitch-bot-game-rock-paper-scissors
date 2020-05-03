@@ -15,6 +15,7 @@ export interface IBattleZoneProps {
 
 export function BattleZone(props: IBattleZoneProps) {
   // const [players, setPlayers] = useState([]);
+  const [counter, setCounter] = useState(0);
 
     const rollDice = (min: number, max: number) => {
         return min + Math.floor(Math.random() * (max-min + 1))
@@ -91,6 +92,36 @@ export function BattleZone(props: IBattleZoneProps) {
     //     setCount(count + 1);
     // }, delay);
 
+    const newPlayers = Object.assign({}, props.players);
+
+    const updatePlayers = (newPlayers: IPlayerValue[], player1Index: number, player2Index: number, myValue: number, enemyValue: number) => {
+        const myResult = result(myValue, enemyValue);
+        const enemyResult = result(enemyValue, myValue);
+
+        if(myResult && !enemyResult) {
+            
+            newPlayers[player1Index].rpsWins += 1;
+        }
+
+        if(!myResult && enemyResult) {
+            newPlayers[player2Index].active = false;
+        }
+        return "Draw"
+
+    }
+
+    useEffect(() => {
+        var timerID = setInterval( () => tick(), 10000 );
+        return function cleanup() {
+          clearInterval(timerID);
+        };
+    });
+
+    function tick() {
+        // props.onChange()
+        setCounter(counter + 1);
+    }
+
     if(props.players.length > 0) {
         return (
             <div className={styles.container}>
@@ -101,7 +132,10 @@ export function BattleZone(props: IBattleZoneProps) {
                     {getSymbol(player1HandValue)}<br />
                     {player1HandValue}<br/>
                     {resultView(player1HandValue, player2HandValue)}</div>
-                <div>VS.</div>
+                <div>
+                    VS.<br />
+                    {counter}
+                </div>
                 <div>
                     {getSymbol(player2HandValue)}<br />
                     {player2HandValue}<br/>
@@ -117,24 +151,24 @@ export function BattleZone(props: IBattleZoneProps) {
     return null;
 }
 
-function useInterval(callback:any, delay:any) {
-    const savedCallback = useRef();
+// function useInterval(callback:any, delay:any) {
+//     const savedCallback = useRef();
   
-    useEffect(() => {
-      savedCallback.current = callback;
-    });
+//     useEffect(() => {
+//       savedCallback.current = callback;
+//     });
   
-    useEffect(() => {
-      function tick() {
+//     useEffect(() => {
+//       function tick() {
 
-            // eslint-disable-next-line 
-            // eslint-disable
-            savedCallback.current();
-      }
+//             // eslint-disable-next-line
+//             // tslint:disable-next-line
+//             savedCallback.current();
+//       }
   
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }, [delay]);
-  }
+//       let id = setInterval(tick, delay);
+//       return () => clearInterval(id);
+//     }, [delay]);
+//   }
 
 export default BattleZone;
