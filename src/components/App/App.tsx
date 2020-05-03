@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import './App.css';
+import styles from './App.module.scss';
 
 import { PlayerList } from '../PlayerList/PlayerList';
 
@@ -13,18 +13,28 @@ import { IPlayer } from '../../interfaces/IPlayer';
 function App() {
   const initUser: IPlayer[] = []
   const [players, setPlayers] = useState(initUser);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     async function loadContent() {
       const response = await fetch('http://localhost:8080');
       const json = await response.json();
       setPlayers(json);
+      setLoading(false);
     }
     loadContent();
   }, []);
 
+  if(loading) {
+    return (
+      <div>
+        LOADING...
+      </div>
+    )
+  }
 
   return (
+
     <div>
       Rock Paper Scissors
 
@@ -35,6 +45,7 @@ function App() {
       <BattleZone players={players} />
 
     </div>
+
   );
 }
 
