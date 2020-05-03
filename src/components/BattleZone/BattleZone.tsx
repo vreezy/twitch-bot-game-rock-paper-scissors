@@ -18,13 +18,13 @@ export function BattleZone(props: IBattleZoneProps) {
     // const [players, setPlayers] = useState([]);
     const [counter, setCounter] = useState(0);
 
+    const players: Players = props.players.clone();
+    const player1: Player | null = players.getRandomActivePlayer();
+    const player2: Player | null = player1 !== null ? players.getRandomActivePlayer([player1]): null;
 
-    const player1: Player | null = props.players.getRandomActivePlayer();
-    const player2: Player | null = player1 !== null ? props.players.getRandomActivePlayer([player1]): null;
-
-    console.log(props.players.length())
-    console.log(player1)
-    console.log(player2)
+    // console.log(props.players.length())
+    console.log("Player1: ", player1)
+    console.log("player2: ", player2)
     // 0 rock
     // 1 paper
     // 2 scissors
@@ -91,7 +91,7 @@ export function BattleZone(props: IBattleZoneProps) {
     });
 
     function tick() {
-        //
+        
         // props.onChange(newPlayers)
         setCounter(counter + 1);
     }
@@ -103,20 +103,20 @@ export function BattleZone(props: IBattleZoneProps) {
                     {player1.render()}
                 </div>
                 <div>
-                    Hallo
-                    {/* {getSymbol(player1HandValue)}<br /> */}
+
+                    {getSymbol(player1HandValue)}<br />
                     {/* {player1HandValue}<br/> */}
-                    {/* {resultView(player1HandValue, player2HandValue)} */}
+                    {resultView(player1HandValue, player2HandValue)} 
                 </div>
                 <div>
                     VS.<br />
                     {counter}
                 </div>
                 <div>
-                    Hallo
-                    {/* {getSymbol(player2HandValue)}<br /> */}
+
+                    {getSymbol(player2HandValue)}<br />
                     {/* {player2HandValue}<br/> */}
-                    {/* {resultView(player2HandValue, player1HandValue)} */}
+                    {resultView(player2HandValue, player1HandValue)} 
                 </div>
                     
                 <div>

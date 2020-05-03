@@ -7,12 +7,14 @@ import { GameService } from '../services/GameService';
 
 export class Players extends Composite {
     protected children: Player[] = [];
-    private selectedIds: number[];
+
     
-    constructor() {
+    constructor(children?: Player[]) {
         super();
 
-        this.selectedIds = [];
+        if(children) {
+            this.children = children;
+        }
     }
 
     // public render(): React.ReactNode {
@@ -21,12 +23,17 @@ export class Players extends Composite {
     //     })
     // }
 
+    public clone = () => {
+        // todo: is Object assing needed?
+        return new Players([...this.children])
+    }
+
     public length(): number {
         return this.children.length;
     }
 
     private getActivePlayers(): Player[] {
-        console.log("children", this.children)
+        // console.log("children", this.children)
         return this.children.filter((child: Component) => {
             return child.active;
         })
@@ -42,11 +49,11 @@ export class Players extends Composite {
 
     public getRandomActivePlayer(lockedPlayers?: Player[]): Player | null {
         let players = this.getActivePlayers();
-        console.log("players", players)
+        // console.log("players", players)
         if(lockedPlayers && lockedPlayers.length > 0) {
             players = players.filter((player: Player) => {
                 return lockedPlayers.some((locked: Player) => {
-                    return locked.toString() === player.toString()
+                    return locked.toString() !== player.toString()
                 })
             })
         }

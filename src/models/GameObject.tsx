@@ -11,10 +11,10 @@ export class GameObject {
         return this.id;
     }
 
-    public clone = () => {
-        // todo: is Object assing needed?
-        return Object.assign({}, this);
-    }
+    // public clone = () => {
+    //     // todo: is Object assing needed?
+    //     return Object.assign({}, this);
+    // }
 
 }
 

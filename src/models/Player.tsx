@@ -11,13 +11,19 @@ export class Player extends Component {
 
         this.userId = userId;
         this.displayName = displayName;
-        this.active = false;
+        this.active = true;
+        this.wins = 0;
     }
 
     public readonly userId: string;
     public readonly displayName: string; // ReactNode
 
+    private wins: number;
+
     
+    public win(): void {
+        this.wins += 1;
+    }
 
 
     public render(): React.ReactNode {
