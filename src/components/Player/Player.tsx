@@ -18,7 +18,9 @@ export function Player(props: IPlayer) {
   if(props.player && props.player["display-name"]) {
     return (
       <div className={styles.player}>
-        {props.player["display-name"]}
+        {props.player["display-name"]}<br />
+        {props.player.rpsWins}<br />
+        {props.player.active ? "active": "inactve"}
         {/* {JSON.stringify(props.player.username)} */}
       </div>
     );

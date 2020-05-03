@@ -9,7 +9,7 @@ import { IPlayerValue } from '../../interfaces/IPlayerValue';
 
 export interface IBattleZoneProps {
     players: IPlayerValue[];
-    // onChange(players: any[]) : void;
+    onChange(players: IPlayerValue[]) : void;
 }
 
 
@@ -23,7 +23,7 @@ export function BattleZone(props: IBattleZoneProps) {
 
     const getPlayer2 = (p1: number): number => {
         if(props.players.length > 0) {
-            const tryx: number = rollDice(0, props.players.length);
+            const tryx: number = rollDice(0, props.players.length - 1);
             if(tryx === p1) {
                     return getPlayer2(p1);
             }
@@ -92,7 +92,7 @@ export function BattleZone(props: IBattleZoneProps) {
     //     setCount(count + 1);
     // }, delay);
 
-    const newPlayers = Object.assign({}, props.players);
+    const newPlayers = [...props.players];
 
     const updatePlayers = (newPlayers: IPlayerValue[], player1Index: number, player2Index: number, myValue: number, enemyValue: number) => {
         const myResult = result(myValue, enemyValue);
@@ -106,23 +106,24 @@ export function BattleZone(props: IBattleZoneProps) {
         if(!myResult && enemyResult) {
             newPlayers[player2Index].active = false;
         }
-        return "Draw"
 
+        
     }
 
     useEffect(() => {
-        var timerID = setInterval( () => tick(), 10000 );
+        var timerID = setInterval( () => tick(), 1000 );
         return function cleanup() {
           clearInterval(timerID);
         };
     });
 
     function tick() {
-        // props.onChange()
+        updatePlayers(newPlayers, player1Index, player2Index,player1HandValue, player2HandValue)
+        props.onChange(newPlayers)
         setCounter(counter + 1);
     }
 
-    if(props.players.length > 0) {
+    if(props.players.length > 1) {
         return (
             <div className={styles.container}>
                 <div>

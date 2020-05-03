@@ -14,6 +14,7 @@ import { IPlayerValue } from '../../interfaces/IPlayerValue';
 function App() {
   const initUser: IPlayerValue[] = []
   const [players, setPlayers] = useState(initUser);
+  const [activePlayers, setActivePlayers] = useState(initUser);
   const [loading, setLoading] = useState(true);
 
   const getPlayers = (users: IUser[]): IPlayerValue[] => {
@@ -29,6 +30,7 @@ function App() {
     return players
 
   }
+
   
   useEffect(() => {
     async function loadContent() {
@@ -36,10 +38,13 @@ function App() {
       const user: IUser[] = await response.json();
       
       setPlayers(getPlayers(user));
+      setActivePlayers(getPlayers(user));
       setLoading(false);
     }
-    loadContent();
-  }, []);
+    if(loading) {
+      loadContent();
+    }
+  }, [loading]);
 
   if(loading) {
     return (
@@ -49,16 +54,49 @@ function App() {
     )
   }
 
+  const updatePlayers = (players: IPlayerValue[]) => {
+    const activePlayer = players.filter((player: IPlayerValue) => {
+      return player.active ? true : false;
+    })
+    setActivePlayers(activePlayer)
+  }
+
+
+  const ZoneOrAward = () => {
+
+    const activePlayers = players.filter((player: IPlayerValue) => {
+      return player.active ? true : false;
+    })
+
+    if(activePlayers.length > 1) {
+      return (
+        <div>
+          in Runde:
+          <PlayerList players={activePlayers} />
+
+          BattleZone:
+          <BattleZone players={players} onChange={(players) => setPlayers(players)} />
+        </div>
+      ) 
+    }
+  
+    return (<div>"AWARD CEROMENY"</div> );
+  }
+
   return (
 
     <div>
       Rock Paper Scissors
-
+      <br />
+      Alle
       <PlayerList players={players} /> 
 
+
+       
       <br /><br />
 
-      <BattleZone players={players} />
+      <ZoneOrAward />
+     
 
     </div>
 
@@ -66,3 +104,4 @@ function App() {
 }
 
 export default App;
+
