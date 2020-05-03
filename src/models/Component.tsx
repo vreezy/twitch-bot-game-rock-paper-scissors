@@ -7,6 +7,7 @@ import GameObject from './GameObject';
 
 export abstract class Component extends GameObject {
     public parent!: Component | null;
+    public active!: boolean;
 
     /**
      * Optionally, the base Component can declare an interface for setting and

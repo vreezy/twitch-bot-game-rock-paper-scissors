@@ -18,7 +18,7 @@ export class Player extends Component {
     public readonly displayName: string; // ReactNode
 
     
-    public active: boolean
+
 
     public render(): React.ReactNode {
         return (

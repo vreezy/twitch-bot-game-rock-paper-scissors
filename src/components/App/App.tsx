@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from './App.module.scss';
 
-import { PlayerList } from '../PlayerList/PlayerList';
+// import { PlayerList } from '../PlayerList/PlayerList';
 
-import { BattleZone } from '../BattleZone/BattleZone';
+// import { BattleZone } from '../BattleZone/BattleZone';
 
 import { IUser } from '../../interfaces/IUser';
 
@@ -15,7 +15,7 @@ import { Players } from '../../models/Players'   // Composite
 
 function App() {
   
-  const [players, setPlayers] = useState({});
+  const [players, setPlayers] = useState(new Players());
 
   const [loading, setLoading] = useState(true);
 
@@ -48,34 +48,6 @@ function App() {
     )
   }
 
-  // const updatePlayers = (players: IPlayerValue[]) => {
-  //   const activePlayer = players.filter((player: IPlayerValue) => {
-  //     return player.active ? true : false;
-  //   })
-  //   setActivePlayers(activePlayer)
-  // }
-
-
-  // const ZoneOrAward = () => {
-
-  //   const activePlayers = players.filter((player: IPlayerValue) => {
-  //     return player.active ? true : false;
-  //   })
-
-  //   if(activePlayers.length > 1) {
-  //     return (
-  //       <div>
-  //         in Runde:
-  //         <PlayerList players={activePlayers} />
-
-  //         BattleZone:
-  //         <BattleZone players={players} onChange={(players) => setPlayers(players)} />
-  //       </div>
-  //     ) 
-  //   }
-  
-  //   return (<div>"AWARD CEROMENY"</div> );
-  // }
 
   return (
 
@@ -83,13 +55,16 @@ function App() {
       Rock Paper Scissors
       <br />
       Alle
-      <PlayerList players={players} /> 
+      <div className={styles.playersContainer}>
+        {players.render()}
+      </div>
+      
 
 
        
       <br /><br />
 
-      <ZoneOrAward />
+      {/* <ZoneOrAward /> */}
      
 
     </div>

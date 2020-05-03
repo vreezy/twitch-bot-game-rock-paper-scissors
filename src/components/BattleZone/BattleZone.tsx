@@ -3,13 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 
 import styles from './BattleZone.module.scss'; 
 
-import { Player } from '../Player/Player';
-
-import { IPlayerValue } from '../../interfaces/IPlayerValue';
+import { Players } from '../../models/Players';
 
 export interface IBattleZoneProps {
-    players: IPlayerValue[];
-    onChange(players: IPlayerValue[]) : void;
+    players: Players;
+    // onChange(players: IPlayerValue[]) : void;
 }
 
 
@@ -18,9 +16,7 @@ export function BattleZone(props: IBattleZoneProps) {
   const [counter, setCounter] = useState(0);
 
 
-    const rollDice = (min: number, max: number) => {
-        return min + Math.floor(Math.random() * (max-min + 1))
-    }
+
 
     const getPlayer2 = (p1: number): number => {
         if(props.players.length > 0) {
