@@ -1,7 +1,7 @@
 import React from 'react';
 import Component from './Component';
 
-export class Composite extends Component {
+export abstract class Composite extends Component {
     protected children: Component[] = [];
 
     /**
@@ -31,14 +31,11 @@ export class Composite extends Component {
      * children and so forth, the whole object tree is traversed as a result.
      */
     public render(): React.ReactNode {
-        const results = [];
-        for (const child of this.children) {
-            results.push(child.render());
-        }
-
-        return results;
+        return this.children.map((child: Component) => {
+            return child.render();
+        })
     }
 }
 
-export default Composite
+export default Composite;
 

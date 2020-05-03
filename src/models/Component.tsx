@@ -1,6 +1,5 @@
 import React from 'react';
 import GameObject from './GameObject';
-import Composite from './Composite';
 
 
 // https://refactoring.guru/design-patterns/composite/typescript/example
@@ -49,4 +48,4 @@ export abstract class Component extends GameObject {
     public abstract render(): React.ReactNode;
 }
 
-export default Composite;
+export default Component;
