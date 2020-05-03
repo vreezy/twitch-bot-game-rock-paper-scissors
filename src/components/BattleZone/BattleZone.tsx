@@ -8,10 +8,20 @@ import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
 
+import rock_left from '../../assets/rock_left.jpg'
+import rock_right from '../../assets/rock_right.jpg'
+
+import paper_left from '../../assets/paper_left.jpg'
+import paper_right from '../../assets/paper_right.jpg'
+
+import scissors_left from '../../assets/scissors_left.jpg'
+import scissors_right from '../../assets/scissors_right.jpg'
+
+
 
 export interface IBattleZoneProps {
     players: Players;
-    // onChange(players: IPlayerValue[]) : void;
+    onChange(players: Players) : void;
 }
 
 
@@ -21,35 +31,41 @@ export function BattleZone(props: IBattleZoneProps) {
     const [time, setTime] = useState(10000);
 
     const players: Players = props.players.clone();
+    console.log("PLAYERS: ", players.toString())
     const player1: Player | null = players.getRandomActivePlayer();
     const player2: Player | null = player1 !== null ? players.getRandomActivePlayer([player1]): null;
 
     // console.log(props.players.length())
-    console.log("Player1: ", player1)
-    console.log("player2: ", player2)
-    // 0 rock
-    // 1 paper
-    // 2 scissors
+    // console.log("Player1: ", player1)
+    // console.log("player2: ", player2)
 
-    // 2 > 1 > 0 > 2
 
     const getSymbol = (value: number) => {
         switch(value) {
             case 0:
-                return "Rock";
+                return rock_left;
             case 1:
-                return "Paper";
+                return paper_left;
             default:
             case 2:
-                return "Scissors";
+                return scissors_left;
         }
     }
 
-
+    const getSymbolRight = (value: number) => {
+        switch(value) {
+            case 0:
+                return rock_right;
+            case 1:
+                return paper_right;
+            default:
+            case 2:
+                return scissors_right;
+        }
+    }
 
     const player1HandValue: number = GameService.rollDice(0, 2);
     const player2HandValue: number = GameService.rollDice(0, 2);
-
     
     const result = (myValue: number, enemyValue: number): boolean => {
         if((myValue - enemyValue) === 1 || (myValue - enemyValue) === -1) {
@@ -80,7 +96,6 @@ export function BattleZone(props: IBattleZoneProps) {
     }
 
 
-
     useEffect(() => {
         var timerID = setInterval( () => tick(), time );
         return function cleanup() {
@@ -90,7 +105,6 @@ export function BattleZone(props: IBattleZoneProps) {
 
     function tick() {
         
-        // props.onChange(newPlayers)
         setCounter(counter + 1);
         if(player1 !== null && player2 !== null) {
             if(player1HandValue !== player2HandValue) {
@@ -103,7 +117,9 @@ export function BattleZone(props: IBattleZoneProps) {
                     player1.deActivate();
                 }
             }
-            // player1.win();
+
+
+            props.onChange(players);
         }
         else {
             setTime(100000);
@@ -127,9 +143,9 @@ export function BattleZone(props: IBattleZoneProps) {
                     </div>
                     <div>
 
-                        {getSymbol(player1HandValue)}<br />
+                        <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
                         {/* {player1HandValue}<br/> */}
-                        {resultView(player1HandValue, player2HandValue)} 
+                        {/* {resultView(player1HandValue, player2HandValue)}  */}
                     </div>
                     <div>
                         VS.<br />
@@ -137,9 +153,9 @@ export function BattleZone(props: IBattleZoneProps) {
                     </div>
                     <div>
 
-                        {getSymbol(player2HandValue)}<br />
+                        <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
                         {/* {player2HandValue}<br/> */}
-                        {resultView(player2HandValue, player1HandValue)} 
+                        {/* {resultView(player2HandValue, player1HandValue)}  */}
                     </div>
                         
                     <div>

@@ -1,17 +1,31 @@
 .container {
     border: 1px solid blue;
     display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-template-rows: 200px;
+    // grid-auto-flow: column;
+    grid-gap: 8px;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: 100px;
+    width: 100%;
+    // justify-items: space-between;
+    box-sizing: border-box;
+    justify-items: center;
 }
 
 
 .playersContainer {
     border: 1px solid red;
-    // width: 100%;
+    width: 100%;
     display: grid;
+    // grid-gap: 8px;
+
     grid-auto-flow: column;
+    
     grid-template-columns: 100px;
     grid-template-rows: 100px;
     box-sizing: border-box;
+}
+
+.image {
+    height: 80%;
+    
 }

@@ -64,7 +64,7 @@ function App() {
        
       <br /><br />
 
-      <BattleZone players={players} />
+      <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
      
 
     </div>
