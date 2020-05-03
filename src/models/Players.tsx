@@ -66,9 +66,15 @@ export class Players extends Composite {
     }
 
     public renderOnlyActive(): React.ReactNode {
-        return this.getActivePlayers();
+        return this.getActivePlayers().map((player: Player) => {
+            return player.render()
+        });
     }
 
+    public getTopthree(): Player[] {
+        
+
+    }
 
 }
 

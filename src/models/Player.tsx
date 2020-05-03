@@ -25,10 +25,14 @@ export class Player extends Component {
         this.wins += 1;
     }
 
+    public deActivate(): void {
+        this.active = false;
+    }
+
 
     public render(): React.ReactNode {
         return (
-            <PlayerView key={uuid()} displayName={this.displayName}/>
+            <PlayerView key={uuid()} displayName={this.displayName} wins={this.wins}/>
         );
     }
 }

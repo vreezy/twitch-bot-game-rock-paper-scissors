@@ -7,6 +7,7 @@ import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
+import { cleanup } from '@testing-library/react';
 
 export interface IBattleZoneProps {
     players: Players;
@@ -77,14 +78,10 @@ export function BattleZone(props: IBattleZoneProps) {
         return "Draw"
     }
 
-    // useInterval(() => {
-    //     setCount(count + 1);
-    // }, delay);
-
 
 
     useEffect(() => {
-        var timerID = setInterval( () => tick(), 10000 );
+        var timerID = setInterval( () => tick(), 1000 );
         return function cleanup() {
           clearInterval(timerID);
         };
@@ -94,35 +91,59 @@ export function BattleZone(props: IBattleZoneProps) {
         
         // props.onChange(newPlayers)
         setCounter(counter + 1);
+        if(player1 !== null && player2 !== null && player1HandValue !== player2HandValue) {
+            if(result(player1HandValue, player2HandValue)) {
+                player1.win()
+                player2.deActivate();
+            }
+            if(result(player2HandValue, player1HandValue)) {
+                player2.win()
+                player1.deActivate();
+            }
+            // player1.win();
+        }
+        else {
+            cleanup();
+        }
     }
 
     if(player1 !== null && player2 !== null ) {
         return (
-            <div className={styles.container}>
-                <div>
-                    {player1.render()}
-                </div>
-                <div>
 
-                    {getSymbol(player1HandValue)}<br />
-                    {/* {player1HandValue}<br/> */}
-                    {resultView(player1HandValue, player2HandValue)} 
+            <div>
+                Aktive Spieler
+                <div className={styles.playersContainer}>
+                    {players.renderOnlyActive()}
                 </div>
-                <div>
-                    VS.<br />
-                    {counter}
-                </div>
-                <div>
 
-                    {getSymbol(player2HandValue)}<br />
-                    {/* {player2HandValue}<br/> */}
-                    {resultView(player2HandValue, player1HandValue)} 
+                <br /><br />
+                Kampfzone
+                <div className={styles.container}>
+                    <div>
+                        {player1.render()}
+                    </div>
+                    <div>
+
+                        {getSymbol(player1HandValue)}<br />
+                        {/* {player1HandValue}<br/> */}
+                        {resultView(player1HandValue, player2HandValue)} 
+                    </div>
+                    <div>
+                        VS.<br />
+                        {counter}
+                    </div>
+                    <div>
+
+                        {getSymbol(player2HandValue)}<br />
+                        {/* {player2HandValue}<br/> */}
+                        {resultView(player2HandValue, player1HandValue)} 
+                    </div>
+                        
+                    <div>
+                        {player2.render()}    
+                    </div>
+            
                 </div>
-                    
-                <div>
-                    {player2.render()}    
-                </div>
-        
             </div>
         );
     }
@@ -130,28 +151,6 @@ export function BattleZone(props: IBattleZoneProps) {
     return (
         <div>no players</div>
     )
-
-
 }
-
-// function useInterval(callback:any, delay:any) {
-//     const savedCallback = useRef();
-  
-//     useEffect(() => {
-//       savedCallback.current = callback;
-//     });
-  
-//     useEffect(() => {
-//       function tick() {
-
-//             // eslint-disable-next-line
-//             // tslint:disable-next-line
-//             savedCallback.current();
-//       }
-  
-//       let id = setInterval(tick, delay);
-//       return () => clearInterval(id);
-//     }, [delay]);
-//   }
 
 export default BattleZone;

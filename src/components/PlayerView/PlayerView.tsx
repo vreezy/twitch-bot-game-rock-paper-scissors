@@ -6,7 +6,8 @@ import styles from './PlayerView.module.scss';
 
 
 export interface IPlayerView {
-  displayName: string
+  displayName: string;
+  wins: number;
 }
 
 
@@ -15,6 +16,7 @@ export function PlayerView(props: IPlayerView) {
     return (
       <div className={styles.player}>
         {props.displayName}<br />
+        {props.wins}<br />
         {/* {props.player.rpsWins}<br />
         {props.player.active ? "active": "inactve"} */}
         {/* {JSON.stringify(props.player.username)} */}
