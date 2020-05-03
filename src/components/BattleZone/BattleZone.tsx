@@ -20,14 +20,12 @@ export function BattleZone(props: IBattleZoneProps) {
         return min + Math.floor(Math.random() * (max-min + 1))
     }
 
-
     const getPlayer2 = (p1: number): number => {
         if(props.players.length > 0) {
             const tryx: number = rollDice(0, props.players.length);
             if(tryx === p1) {
                     return getPlayer2(p1);
             }
-            
             return tryx;
         }
         return 0;
@@ -39,9 +37,9 @@ export function BattleZone(props: IBattleZoneProps) {
     console.log("player1Number ", player1Number);
     console.log("player2Number ", player2Number)
     
-    useInterval(() => {
-        setCount(count + 1);
-    }, delay);
+    // useInterval(() => {
+    //     setCount(count + 1);
+    // }, delay);
 
     if(props.players.length > 0) {
         return (
@@ -60,21 +58,21 @@ export function BattleZone(props: IBattleZoneProps) {
     return null;
 }
 
-function useInterval(callback:any, delay:any) {
-    const savedCallback = useRef();
+// function useInterval(callback:any, delay:any) {
+//     const savedCallback = useRef();
   
-    useEffect(() => {
-      savedCallback.current = callback;
-    });
+//     useEffect(() => {
+//       savedCallback.current = callback;
+//     });
   
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
+//     useEffect(() => {
+//       function tick() {
+//         savedCallback.current();
+//       }
   
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }, [delay]);
-  }
+//       let id = setInterval(tick, delay);
+//       return () => clearInterval(id);
+//     }, [delay]);
+//   }
 
 export default BattleZone;
