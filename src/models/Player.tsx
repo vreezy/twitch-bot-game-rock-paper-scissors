@@ -25,6 +25,10 @@ export class Player extends Component {
         this.wins += 1;
     }
 
+    public getWins(): number {
+        return this.wins;
+    }
+
     public deActivate(): void {
         this.active = false;
     }

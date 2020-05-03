@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './BattleZone.module.scss'; 
 
@@ -7,7 +7,7 @@ import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
-import { cleanup } from '@testing-library/react';
+
 
 export interface IBattleZoneProps {
     players: Players;
@@ -18,6 +18,7 @@ export interface IBattleZoneProps {
 export function BattleZone(props: IBattleZoneProps) {
     // const [players, setPlayers] = useState([]);
     const [counter, setCounter] = useState(0);
+    const [time, setTime] = useState(10000);
 
     const players: Players = props.players.clone();
     const player1: Player | null = players.getRandomActivePlayer();
@@ -81,7 +82,7 @@ export function BattleZone(props: IBattleZoneProps) {
 
 
     useEffect(() => {
-        var timerID = setInterval( () => tick(), 1000 );
+        var timerID = setInterval( () => tick(), time );
         return function cleanup() {
           clearInterval(timerID);
         };
@@ -91,19 +92,21 @@ export function BattleZone(props: IBattleZoneProps) {
         
         // props.onChange(newPlayers)
         setCounter(counter + 1);
-        if(player1 !== null && player2 !== null && player1HandValue !== player2HandValue) {
-            if(result(player1HandValue, player2HandValue)) {
-                player1.win()
-                player2.deActivate();
-            }
-            if(result(player2HandValue, player1HandValue)) {
-                player2.win()
-                player1.deActivate();
+        if(player1 !== null && player2 !== null) {
+            if(player1HandValue !== player2HandValue) {
+                if(result(player1HandValue, player2HandValue)) {
+                    player1.win()
+                    player2.deActivate();
+                }
+                else {
+                    player2.win()
+                    player1.deActivate();
+                }
             }
             // player1.win();
         }
         else {
-            cleanup();
+            setTime(100000);
         }
     }
 
@@ -149,7 +152,14 @@ export function BattleZone(props: IBattleZoneProps) {
     }
 
     return (
-        <div>no players</div>
+        <div>
+            Gewinner
+
+            <div className={styles.playersContainer}>
+                
+                {players.renderWinner()}
+            </div>
+        </div>
     )
 }
 

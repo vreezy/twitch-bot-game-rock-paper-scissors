@@ -71,8 +71,19 @@ export class Players extends Composite {
         });
     }
 
-    public getTopthree(): Player[] {
-        
+    public renderWinner(): React.ReactNode {
+        let mostWins: number = 0;
+        this.children.forEach((player: Player) => {
+            mostWins = player.getWins() > mostWins ? player.getWins() : mostWins;
+        })
+
+        const winner: Player[] = this.children.filter((player: Player) => {
+            return player.getWins() === mostWins
+        })
+
+        return winner.map((player: Player) => {
+            return player.render()
+        })
 
     }
 
