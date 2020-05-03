@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from './BattleZone.module.scss'; 
 
@@ -39,7 +39,9 @@ export function BattleZone(props: IBattleZoneProps) {
     console.log("player1Number ", player1Number);
     console.log("player2Number ", player2Number)
     
-
+    useInterval(() => {
+        setCount(count + 1);
+    }, delay);
 
     if(props.players.length > 0) {
         return (
@@ -57,5 +59,22 @@ export function BattleZone(props: IBattleZoneProps) {
 
     return null;
 }
+
+function useInterval(callback:any, delay:any) {
+    const savedCallback = useRef();
+  
+    useEffect(() => {
+      savedCallback.current = callback;
+    });
+  
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+  
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }, [delay]);
+  }
 
 export default BattleZone;
