@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 import styles from './BattleZone.module.scss'; 
+import './BattleZone.scss';
 
 import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
@@ -128,41 +129,56 @@ export function BattleZone(props: IBattleZoneProps) {
 
     if(player1 !== null && player2 !== null ) {
         return (
-
             <div>
+            <section className="section"> 
+            <div className="container">
                 Aktive Spieler
+
                 <div className={styles.playersContainer}>
                     {players.renderOnlyActive()}
                 </div>
 
-                <br /><br />
-                Kampfzone
-                <div className={styles.container}>
-                    <div>
-                        {player1.render()}
-                    </div>
-                    <div>
-
-                        <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
-                        {/* {player1HandValue}<br/> */}
-                        {/* {resultView(player1HandValue, player2HandValue)}  */}
-                    </div>
-                    <div>
-                        VS.<br />
-                        {counter}
-                    </div>
-                    <div>
-
-                        <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
-                        {/* {player2HandValue}<br/> */}
-                        {/* {resultView(player2HandValue, player1HandValue)}  */}
-                    </div>
-                        
-                    <div>
-                        {player2.render()}    
-                    </div>
-            
+                    <br /><br />
                 </div>
+            </section>
+
+            <section className="section"> 
+                <div className="container">
+                    <h1>Kampfzone</h1>
+                </div>
+                <div className="container">
+                    <h1 className="title">Section</h1>
+                    
+                    <div className="tile is-ancestor">
+                        <div className="tile is-2">
+                            {player1.render()}
+                        </div>
+                        
+                        <div className="tile">
+                        
+
+                            <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
+                            {/* {player1HandValue}<br/> */}
+                            {/* {resultView(player1HandValue, player2HandValue)}  */}
+                        </div>
+                        <div className="tile">
+                            VS.<br />
+                            {counter}
+                        </div>
+                        <div className="tile">
+
+                            <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
+                            {/* {player2HandValue}<br/> */}
+                            {/* {resultView(player2HandValue, player1HandValue)}  */}
+                        </div>
+                            
+                        <div className="tile">
+                            {player2.render()}    
+                        </div>
+                
+                    </div>
+                </div>
+            </section>
             </div>
         );
     }

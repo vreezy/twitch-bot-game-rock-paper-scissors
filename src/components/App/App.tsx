@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from './App.module.scss';
-
+import './app.scss';
 // import { PlayerList } from '../PlayerList/PlayerList';
 
 import { BattleZone } from '../BattleZone/BattleZone';

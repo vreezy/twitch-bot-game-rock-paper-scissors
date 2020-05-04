@@ -1,3 +1,7 @@
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+@import "bulma/sass/elements/button.sass";
+
 .container {
     border: 1px solid blue;
     display: grid;
@@ -26,6 +30,6 @@
 }
 
 .image {
-    height: 80%;
+    width: 100%;
     
 }
