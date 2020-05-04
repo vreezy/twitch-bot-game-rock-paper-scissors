@@ -131,48 +131,51 @@ export function BattleZone(props: IBattleZoneProps) {
         return (
             <div>
             <section className="section"> 
-            <div className="container">
-                Aktive Spieler
+                <div className="container">
+                    <h1 className="title">
+                        Aktive Spieler
+                    </h1>
+               
+                    <div className="tile">
+                        {players.renderOnlyActive()}
+                    </div>
 
-                <div className={styles.playersContainer}>
-                    {players.renderOnlyActive()}
-                </div>
-
-                    <br /><br />
                 </div>
             </section>
 
             <section className="section"> 
                 <div className="container">
-                    <h1>Kampfzone</h1>
-                </div>
-                <div className="container">
-                    <h1 className="title">Section</h1>
+                    <h1 className="title">Kampfzone</h1>
                     
-                    <div className="tile is-ancestor">
+                    <div className="tile">
                         <div className="tile is-2">
                             {player1.render()}
                         </div>
                         
-                        <div className="tile">
+                        <div className="tile is-2">
                         
 
                             <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
                             {/* {player1HandValue}<br/> */}
                             {/* {resultView(player1HandValue, player2HandValue)}  */}
                         </div>
-                        <div className="tile">
-                            VS.<br />
-                            {counter}
+                        <div className="tile is-4 has-text-centered">
+                            <div className="columns is-vcentered is-100">
+                                <div className="column is-full has-text-centered">
+                                    VS. <br/>
+                                    Round {counter}
+                                </div>
+                            </div>
+    
                         </div>
-                        <div className="tile">
+                        <div className="tile is-2">
 
                             <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
                             {/* {player2HandValue}<br/> */}
                             {/* {resultView(player2HandValue, player1HandValue)}  */}
                         </div>
                             
-                        <div className="tile">
+                        <div className="tile is-2">
                             {player2.render()}    
                         </div>
                 

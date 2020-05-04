@@ -52,17 +52,23 @@ function App() {
   return (
 
     <div>
-      Rock Paper Scissors
-      <br />
-      Alle
-      <div className={styles.playersContainer}>
-        {players.render()}
-      </div>
-      
+ 
+      <section className="section"> 
+        <div className="container">
+            <h1 className="title">
+              Rock Paper Scissors
+            </h1>
+
+            <div className="tile">
+              {players.render()}
+            </div>
+
+        </div>
+      </section>
+
+              
 
 
-       
-      <br /><br />
 
       <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
      
