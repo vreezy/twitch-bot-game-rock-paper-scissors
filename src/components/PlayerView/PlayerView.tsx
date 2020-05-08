@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useRef, useEffect } from 'react';
-// import player from '../../assets/player3.svg'; 
-import { ReactComponent as Player } from '../../assets/player3.svg'; 
+import player from '../../assets/player3.svg'; 
+// import { ReactComponent as Player } from '../../assets/player3.svg'; 
 
 import styles from './PlayerView.module.scss'; 
 // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
@@ -29,11 +29,17 @@ export function PlayerView(props: IPlayerView) {
  
 
     useEffect(() => {
-      if(playerSVG) {
-        // const playerimage = document.getElementById();
+      if(playerSVG && playerSVG.current !== null) {
+        // const playerimage = document.getElementById("test123");
+        // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
         // @ts-ignore
         // playerSVG.current.focus()
-        ReactDOM.findDOMNode(playerSVG)
+        // const playerimage = playerSVG.current
+        // @ts-ignore
+
+        
+        // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
+        // ReactDOM.findDOMNode(Player)
         // const playerimage = document.getElementById(playerSVG.current);
         // if(playerimage !== null) {
         //   // @ts-ignore
@@ -49,15 +55,15 @@ export function PlayerView(props: IPlayerView) {
     }, [playerSVG]) 
 
     return (
-      <div className="container">
+      <div className={styles.container}>
         {/* 
         @ts-ignore */}
-        <Player ref={playerSVG} />
-        {/* <img src={player} className="player" id="playerimage" ref={playerSVG} alt="Player box"/> */}
+        {/* <Player ref={playerSVG} id="test123" className={styles.player}/> */}
+        <img src={player} className="player" id="playerimage" ref={playerSVG} alt="Player box"/>
       
      
-   <div className="char">
-       qefqefqef qefqe qefq
+   <div className={styles.char}>
+       &nbsp;
    </div>
   </div>
     )
