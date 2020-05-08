@@ -17,7 +17,7 @@ export interface IPlayerView {
 
 
 export function PlayerView(props: IPlayerView) {
-    const playerSVG: SVGElement = useRef<SVGElement>(null);
+    // const playerSVG = useRef<SVGElement | null>();
     // return (
     //   <div className={styles.player}>
     //     {props.displayName}<br />
@@ -30,37 +30,37 @@ export function PlayerView(props: IPlayerView) {
 
     const pid = "playerimage" + uuidv4();
 
-    useEffect(() => {
-      if(playerSVG && playerSVG.current !== null) {
-        // const playerimage = document.getElementById(pid);
-        playerSVG.current.querySelector()
-        // console.log(playerimage)
-        // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-        // @ts-ignore
-        // playerSVG.current.focus()
-        // const playerimage = playerSVG.current
-        // @ts-ignore
+    // useEffect(() => {
+    //   if(playerSVG && playerSVG.current !== null) {
+    //     // const playerimage = document.getElementById(pid);
+    //     playerSVG.current.querySelector("tspan.tspan2157");
+    //     // console.log(playerimage)
+    //     // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
+    //     // @ts-ignore
+    //     // playerSVG.current.focus()
+    //     // const playerimage = playerSVG.current
+    //     // @ts-ignore
 
         
-        // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-        // ReactDOM.findDOMNode(Player)
-        // const playerimage = document.getElementById(playerSVG.current);
-        // if(playerimage !== null) {
-        //   // @ts-ignore
-        //   playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-        //   // playerlevel
-        //   // @ts-ignore
-        //   playerimage.getElementById("tspan2157-9").textContent = "1";
-        //   // playerwins
-        //   // @ts-ignore
-        //   playerimage.getElementById("tspan2157-9-9").textContent = "0";
-        // }
-      }
-    }, [playerSVG]) 
+    //     // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
+    //     // ReactDOM.findDOMNode(Player)
+    //     // const playerimage = document.getElementById(playerSVG.current);
+    //     // if(playerimage !== null) {
+    //     //   // @ts-ignore
+    //     //   playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
+    //     //   // playerlevel
+    //     //   // @ts-ignore
+    //     //   playerimage.getElementById("tspan2157-9").textContent = "1";
+    //     //   // playerwins
+    //     //   // @ts-ignore
+    //     //   playerimage.getElementById("tspan2157-9-9").textContent = "0";
+    //     // }
+    //   }
+    // }, [playerSVG]) 
 
     return (
       <div className={styles.container}>
-      {/* <ReactSVG
+      <ReactSVG
         src={player}
         afterInjection={(error, svg) => {
           if (error) {
@@ -68,7 +68,15 @@ export function PlayerView(props: IPlayerView) {
             return
           }
           
-          svg!.getElementById("tspan2157").textContent = "Hallo Welt";
+          if(svg !== undefined && svg !== null) {
+            // @ts-ignore
+            svg.querySelector("tspan").textContent = props.displayName;
+
+            const all = svg.querySelectorAll("tspan");
+            all[0].textContent = props.displayName;
+            all[1].textContent = "1";
+            all[2].textContent = props.wins.toString();
+          }
           console.log(svg)
         }}
         // beforeInjection={svg => {
@@ -84,11 +92,11 @@ export function PlayerView(props: IPlayerView) {
         onClick={() => {
           console.log('wrapper onClick')
         }}
-      /> */}
+      />
         
         {/* 
         @ts-ignore */}
-        <Player ref={playerSVG} id={pid} className={styles.player}/>
+        {/* <Player ref={playerSVG} id={pid} className={styles.player}/> */}
         {/* <img src={player} className="player" id={pid} ref={playerSVG} alt="Player box"/> */}
       
      
