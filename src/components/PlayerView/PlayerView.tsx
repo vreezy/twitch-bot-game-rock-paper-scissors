@@ -52,7 +52,7 @@ export function PlayerView(props: IPlayerView) {
       <div className="container">
         {/* 
         @ts-ignore */}
-        <Player />
+        <Player ref={playerSVG} />
         {/* <img src={player} className="player" id="playerimage" ref={playerSVG} alt="Player box"/> */}
       
      
